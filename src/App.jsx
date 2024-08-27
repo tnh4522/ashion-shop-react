@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from './component/layout/Header.jsx'
+import Footer from "./component/layout/Footer.jsx";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {lazy, Suspense} from "react";
+import ErrorPage from "./component/layout/ErrorPage.jsx";
+import ContactPage from "./component/page/ContactPage.jsx";
+import BlogPage from "./component/page/Blog/BlogPage.jsx";
+import BlogDetail from "./component/page/Blog/BlogDetail.jsx";
+import CheckoutPage from "./component/page/Checkout/CheckoutPage.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+const Loading = () => (
+    <div id="preloder">
+        <div className="loader"></div>
+    </div>
+);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const HomePage = lazy(() => delayForDemo(import('./component/page/Home/HomePage.jsx')));
+const Products = lazy(() => delayForDemo(import('./component/page/Product/Products.jsx')));
+const ProductDetail = lazy(() => delayForDemo(import('./component/page/Product/ProductDetail.jsx')));
+const Cart = lazy(() => delayForDemo(import('./component/page/Cart/ShopCart.jsx')));
+
+function App(props) {
+    return (
+        <Router>
+            <Header/>
+            <Suspense fallback={<Loading/>}>
+                <Routes>
+                    <Route path="*" element={<ErrorPage/>}/>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/shop" element={<Products/>}/>
+                    <Route path="/product" element={<ProductDetail/>}/>
+                    <Route path="/cart" element={<Cart/>}/>
+                    <Route path="/contact" element={<ContactPage/>}/>
+                    <Route path="/blog" element={<BlogPage/>}/>
+                    <Route path="/blog/:id" element={<BlogDetail/>}/>
+                    <Route path="/check-out" element={<CheckoutPage/>}/>
+                </Routes>
+            </Suspense>
+            <Footer/>
+        </Router>
+    )
 }
 
 export default App
+
+function delayForDemo(promise) {
+    return new Promise(resolve => {
+        setTimeout(resolve, 300);
+    }).then(() => promise);
+}
