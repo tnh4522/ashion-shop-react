@@ -6,6 +6,7 @@ import ShowOffCanvasContextProvider from "./component/contexts/ShowOffCanvasCont
 import CartOffCanvas from "./component/layout/CartOffCanvas.jsx";
 
 import 'reactjs-popup/dist/index.css';
+import WishListOffCanvas from "./component/layout/WishListOffCanvas.jsx";
 
 
 
@@ -16,6 +17,7 @@ function App({children}) {
         <ShowOffCanvasContextProvider>
             <CartOffCanvas/>
             <MenuOffcanvas/>
+            <WishListOffCanvas/>
             <Header/>
             {children}
             <Footer/>

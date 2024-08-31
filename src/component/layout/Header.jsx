@@ -41,7 +41,7 @@ const options = [
 ];
 
 function Header() {
-    const {showMenu, toggleShowMenu, showCart, toggleShowCart} = useShowOffCanvasContext();
+    const {showMenu, toggleShowMenu, showCart, toggleShowCart, showWishlist, toggleShowWishlist} = useShowOffCanvasContext();
 
     const items = [
         {
@@ -132,7 +132,7 @@ function Header() {
                                 >
                                     <li><i className="fa-regular fa-user"></i></li>
                                 </Dropdown>
-                                <li><a href="#"><span className="icon_heart_alt"></span>
+                                <li><a onClick={() => toggleShowWishlist(!showWishlist)}><span className="icon_heart_alt"></span>
                                     <div className="tip">2</div>
                                 </a></li>
                                 <li><a onClick={() => toggleShowCart(!showCart)}><span className="icon_bag_alt"></span>

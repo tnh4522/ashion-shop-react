@@ -3948,3 +3948,108 @@ a {
 	text-align: center;
 	padding: 12px 0 10px;
 }
+
+.wishlist__offcanvas table {
+	width: 100%;
+}
+
+.wishlist__offcanvas thead {
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.wishlist__offcanvas thead th {
+	font-size: 14px;
+	color: #111111;
+	font-weight: 600;
+	text-transform: uppercase;
+	padding-bottom: 10px;
+}
+
+.wishlist__offcanvas tbody tr {
+	border-bottom: 1px solid #f3f2f2;
+}
+
+.wishlist__offcanvas tbody tr td {
+	padding: 10px 0;
+}
+
+.wishlist__offcanvas tbody tr .cart__product__item {
+	overflow: hidden;
+	width: 70%;
+}
+
+.wishlist__offcanvas tbody tr .cart__product__item img {
+	float: left;
+	margin-right: 10px;
+}
+
+.wishlist__offcanvas tbody tr .cart__product__item .cart__product__item__title {
+	overflow: hidden;
+	padding-top: 20px;
+}
+
+.wishlist__offcanvas tbody tr .cart__product__item .cart__product__item__title h5 {
+	color: #111111;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.wishlist__offcanvas tbody tr .cart__product__item .cart__product__item__title .rating i {
+	font-size: 9px;
+	color: #e3c01c;
+	margin-right: 4px;
+}
+
+.wishlist__offcanvas tbody tr .cart__price {
+	font-size: 14px;
+	color: #ca1515;
+	font-weight: 600;
+	width: 100px;
+	float: right;
+}
+
+.wishlist__offcanvas tbody tr .cart__quantity {
+	width: 100px;
+}
+
+.wishlist__offcanvas tbody tr .cart__quantity .pro-qty {
+	border: none;
+	padding: 0;
+	width: 100px;
+	border-radius: 0;
+}
+
+.wishlist__offcanvas tbody tr .cart__quantity .pro-qty input {
+	color: #444444;
+}
+
+.wishlist__offcanvas tbody tr .cart__quantity .pro-qty .qtybtn {
+	font-size: 14px;
+	color: #444444;
+}
+
+.wishlist__offcanvas tbody tr .cart__total {
+	font-size: 14px;
+	color: #ca1515;
+	font-weight: 600;
+	width: 100px;
+}
+
+.wishlist__offcanvas tbody tr .cart__close {
+	text-align: right;
+	width: 50px;
+}
+
+.wishlist__offcanvas tbody tr .cart__close span {
+	height: 35px;
+	width: 35px;
+	background: #f2f2f2;
+	border-radius: 50%;
+	font-size: 14px;
+	color: #111111;
+	line-height: 38px;
+	text-align: center;
+	display: inline-block;
+	font-weight: 600;
+	cursor: pointer;
+}
