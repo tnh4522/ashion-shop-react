@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import OwlCarousel from 'react-owl-carousel';
@@ -14,7 +14,6 @@ function Banner() {
         autoplayTimeout: 3000,
         autoplayHoverPause: true,
         smartSpeed: 1200,
-        autoHeight: false,
     };
 
     return (

@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import {InputNumber} from "antd";
 
 function ShopCart() {
     return (
@@ -47,9 +48,14 @@ function ShopCart() {
                                         </td>
                                         <td className="cart__price">$ 150.0</td>
                                         <td className="cart__quantity">
-                                            <div className="pro-qty">
-                                                <input type="text" value="1"/>
-                                            </div>
+                                            <InputNumber
+                                                style={{width: 60}}
+                                                min={1}
+                                                max={100} k
+                                                eyboard={true}
+                                                defaultValue={3}
+                                                size="small"
+                                            />
                                         </td>
                                         <td className="cart__total">$ 300.0</td>
                                         <td className="cart__close"><span className="icon_close"></span></td>
@@ -70,9 +76,14 @@ function ShopCart() {
                                         </td>
                                         <td className="cart__price">$ 170.0</td>
                                         <td className="cart__quantity">
-                                            <div className="pro-qty">
-                                                <input type="text" value="1"/>
-                                            </div>
+                                            <InputNumber
+                                                style={{width: 60}}
+                                                min={1}
+                                                max={100} k
+                                                eyboard={true}
+                                                defaultValue={3}
+                                                size="small"
+                                            />
                                         </td>
                                         <td className="cart__total">$ 170.0</td>
                                         <td className="cart__close"><span className="icon_close"></span></td>
@@ -93,9 +104,14 @@ function ShopCart() {
                                         </td>
                                         <td className="cart__price">$ 85.0</td>
                                         <td className="cart__quantity">
-                                            <div className="pro-qty">
-                                                <input type="text" value="1"/>
-                                            </div>
+                                            <InputNumber
+                                                style={{width: 60}}
+                                                min={1}
+                                                max={100} k
+                                                eyboard={true}
+                                                defaultValue={3}
+                                                size="small"
+                                            />
                                         </td>
                                         <td className="cart__total">$ 170.0</td>
                                         <td className="cart__close"><span className="icon_close"></span></td>
@@ -116,9 +132,14 @@ function ShopCart() {
                                         </td>
                                         <td className="cart__price">$ 55.0</td>
                                         <td className="cart__quantity">
-                                            <div className="pro-qty">
-                                                <input type="text" value="1"/>
-                                            </div>
+                                            <InputNumber
+                                                style={{width: 60}}
+                                                min={1}
+                                                max={100} k
+                                                eyboard={true}
+                                                defaultValue={3}
+                                                size="small"
+                                            />
                                         </td>
                                         <td className="cart__total">$ 110.0</td>
                                         <td className="cart__close"><span className="icon_close"></span></td>

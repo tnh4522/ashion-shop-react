@@ -1,6 +1,10 @@
+import React from 'react';
 import {Link} from "react-router-dom";
+import Popup from 'reactjs-popup';
+import {Slider} from 'antd';
 
 function Products() {
+    const [value, setValue] = React.useState([20, 80]);
     return (
         <div>
             <div className="breadcrumb-option">
@@ -125,14 +129,19 @@ function Products() {
                                         <h4>Shop by price</h4>
                                     </div>
                                     <div className="filter-range-wrap">
-                                        <div
-                                            className="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                            data-min="33" data-max="99"></div>
+                                        <Slider range={{draggableTrack: true}}
+                                                value={value}
+                                                onChange={setValue}
+                                                styles={{
+                                                    track: {
+                                                        background: '#ca1515'
+                                                    }
+                                                }}
+                                        />
                                         <div className="range-slider">
                                             <div className="price-input">
-                                                <p>Price:</p>
-                                                <input type="text" id="minamount"/>
-                                                <input type="text" id="maxamount"/>
+                                                <p>Price: </p>
+                                                <span>{' ' + value[0]}</span> - <span>{value[1]}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -238,11 +247,19 @@ function Products() {
                             <div className="row">
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-1.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-1.jpg)"}}>
                                             <div className="label new">New</div>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-1.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <li>
+                                                    <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                           contentStyle={{width: 350, border: "none", borderRadius: 15}}
+                                                           modal>
+                                                        <div className="popup-image">
+                                                            <img src="/ashion-master/img/shop/shop-1.jpg" alt=""/>
+                                                        </div>
+                                                    </Popup>
+                                                </li>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -262,10 +279,18 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-2.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-2.jpg)"}}>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-2.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <li>
+                                                    <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                           contentStyle={{width: 350, border: "none", borderRadius: 15}}
+                                                           modal>
+                                                        <div className="popup-image">
+                                                            <img src="/ashion-master/img/shop/shop-2.jpg" alt=""/>
+                                                        </div>
+                                                    </Popup>
+                                                </li>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -285,10 +310,18 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-3.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-3.jpg)"}}>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-3.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <li>
+                                                    <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                           contentStyle={{width: 350, border: "none", borderRadius: 15}}
+                                                           modal>
+                                                        <div className="popup-image">
+                                                            <img src="/ashion-master/img/shop/shop-3.jpg" alt=""/>
+                                                        </div>
+                                                    </Popup>
+                                                </li>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -308,10 +341,15 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-4.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-4.jpg)"}}>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-4.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                       modal>
+                                                    <div className="popup-image">
+                                                        <img src="/ashion-master/img/shop/shop-4.jpg" alt=""/>
+                                                    </div>
+                                                </Popup>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -331,11 +369,16 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item sale">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-5.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-5.jpg)"}}>
                                             <div className="label">Sale</div>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-5.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                       modal>
+                                                    <div className="popup-image">
+                                                        <img src="/ashion-master/img/shop/shop-5.jpg" alt=""/>
+                                                    </div>
+                                                </Popup>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -355,10 +398,15 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-6.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-6.jpg)"}}>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-6.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                       modal>
+                                                    <div className="popup-image">
+                                                        <img src="/ashion-master/img/shop/shop-6.jpg" alt=""/>
+                                                    </div>
+                                                </Popup>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -378,10 +426,15 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-7.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-7.jpg)"}}>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-7.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                       modal>
+                                                    <div className="popup-image">
+                                                        <img src="/ashion-master/img/shop/shop-7.jpg" alt=""/>
+                                                    </div>
+                                                </Popup>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -401,11 +454,16 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-8.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-8.jpg)"}}>
                                             <div className="label stockout stockblue">Out Of Stock</div>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-8.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                       modal>
+                                                    <div className="popup-image">
+                                                        <img src="/ashion-master/img/shop/shop-8.jpg" alt=""/>
+                                                    </div>
+                                                </Popup>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>
@@ -425,11 +483,16 @@ function Products() {
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <div className="product__item sale">
-                                        <div className="product__item__pic set-bg" data-setbg="img/shop/shop-9.jpg">
+                                        <div className="product__item__pic set-bg"
+                                             style={{backgroundImage: "url(/ashion-master/img/shop/shop-9.jpg)"}}>
                                             <div className="label">Sale</div>
                                             <ul className="product__hover">
-                                                <li><a href="img/shop/shop-9.jpg" className="image-popup"><span
-                                                    className="arrow_expand"></span></a></li>
+                                                <Popup trigger={<a><span className="arrow_expand"></span></a>}
+                                                       modal>
+                                                    <div className="popup-image">
+                                                        <img src="/ashion-master/img/shop/shop-9.jpg" alt=""/>
+                                                    </div>
+                                                </Popup>
                                                 <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                                 <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                             </ul>

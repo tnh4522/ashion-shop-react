@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import mixitup from 'mixitup';
+import Popup from "reactjs-popup";
 
 function ProductSpad() {
     const [activeFilter, setActiveFilter] = useState('*');
@@ -25,7 +26,8 @@ function ProductSpad() {
                     <div className="col-lg-8 col-md-8">
                         <ul className="filter__controls">
                             <li className={activeFilter === '*' ? 'active' : ''}
-                                onClick={() => handleFilterClick('*')} data-filter="*">All</li>
+                                onClick={() => handleFilterClick('*')} data-filter="*">All
+                            </li>
                             <li className={activeFilter === '.women' ? 'active' : ''}
                                 onClick={() => handleFilterClick('.women')} data-filter=".women">Women’s
                             </li>
@@ -51,8 +53,14 @@ function ProductSpad() {
                                  style={{backgroundImage: "url(/ashion-master/img/product/product-1.jpg)"}}>
                                 <div className="label new">New</div>
                                 <ul className="product__hover">
-                                    <li><a href="/ashion-master/img/product/product-1.jpg" className="image-popup"><span
-                                        className="arrow_expand"></span></a></li>
+                                    <Popup trigger={<li><a className="image-popup">
+                                        <span className="arrow_expand"></span></a></li>}
+                                           contentStyle={{width: 350, border: "none", borderRadius: 15}}
+                                           modal>
+                                        <div className="popup-image">
+                                            <img src="/ashion-master/img/product/product-1.jpg" alt=""/>
+                                        </div>
+                                    </Popup>
                                     <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                     <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                 </ul>
@@ -75,8 +83,14 @@ function ProductSpad() {
                             <div className="product__item__pic set-bg"
                                  style={{backgroundImage: "url(/ashion-master/img/product/product-2.jpg)"}}>
                                 <ul className="product__hover">
-                                    <li><a href="/ashion-master/img/product/product-2.jpg" className="image-popup"><span
-                                        className="arrow_expand"></span></a></li>
+                                    <Popup trigger={<li><a className="image-popup">
+                                        <span className="arrow_expand"></span></a></li>}
+                                           contentStyle={{width: 350, border: "none", borderRadius: 15}}
+                                           modal>
+                                        <div className="popup-image">
+                                            <img src="/ashion-master/img/product/product-2.jpg" alt=""/>
+                                        </div>
+                                    </Popup>
                                     <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                     <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                 </ul>
@@ -100,8 +114,14 @@ function ProductSpad() {
                                  style={{backgroundImage: "url(/ashion-master/img/product/product-3.jpg)"}}>
                                 <div className="label stockout">out of stock</div>
                                 <ul className="product__hover">
-                                    <li><a href="/ashion-master/img/product/product-3.jpg" className="image-popup"><span
-                                        className="arrow_expand"></span></a></li>
+                                    <Popup trigger={<li><a className="image-popup">
+                                        <span className="arrow_expand"></span></a></li>}
+                                           contentStyle={{width: 350, border: "none", borderRadius: 15}}
+                                           modal>
+                                        <div className="popup-image">
+                                            <img src="/ashion-master/img/product/product-3.jpg" alt=""/>
+                                        </div>
+                                    </Popup>
                                     <li><a href="#"><span className="icon_heart_alt"></span></a></li>
                                     <li><a href="#"><span className="icon_bag_alt"></span></a></li>
                                 </ul>
