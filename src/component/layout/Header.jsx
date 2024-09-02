@@ -1,8 +1,6 @@
-import React from 'react';
 import {Link} from "react-router-dom";
 import {Image} from 'cloudinary-react';
 import {AutoComplete, Flex, Input} from 'antd';
-import Popup from "reactjs-popup";
 import useShowOffCanvasContext from "../hooks/useShowOffCanvasContext.jsx";
 import {Dropdown} from 'antd';
 
@@ -117,8 +115,8 @@ function Header() {
                     <div className="col-lg-3">
                         <div className="header__right">
                             <div className="header__right__auth">
-                                <a href="#">Login</a>
-                                <a href="#">Register</a>
+                                <Link to="/login">Login</Link>
+                                <Link to="/register">Register</Link>
                             </div>
                             <ul className="header__right__widget">
                                 <Dropdown

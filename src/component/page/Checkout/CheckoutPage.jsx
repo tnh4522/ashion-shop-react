@@ -26,7 +26,7 @@ function CheckoutPage() {
                     </div>
                     <form action="#" className="checkout__form">
                         <div className="row">
-                            <div className="col-lg-8">
+                            <div className="col-lg-7">
                                 <h5>Billing detail</h5>
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-sm-6">
@@ -105,7 +105,7 @@ function CheckoutPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-4">
+                            <div className="col-lg-5">
                                 <div className="checkout__order">
                                     <h5>Your order</h5>
                                     <div className="checkout__order__product">

@@ -96,8 +96,10 @@ textarea:focus {
 
 a:hover,
 a:focus {
+	transition: all 0.4s;
 	text-decoration: none;
 	outline: none;
+	color: #ca1515 !important;
 }
 
 ul,
@@ -1142,7 +1144,7 @@ ol {
 }
 
 .product__item {
-	margin-bottom: 35px;
+	padding-bottom: 35px;
 }
 
 .product__item:hover .product__hover li {
@@ -4053,3 +4055,42 @@ a {
 	font-weight: 600;
 	cursor: pointer;
 }
+
+.categories {
+	padding: 10px 20px;
+}
+
+.product__item {
+	margin-top: var(--bs-gutter-x);
+}
+
+.categories__item {
+	border-radius: 15px;
+}
+
+.categories__item, .product__item, .set-bg {
+	transition: all .5s ease;
+}
+
+.product__item:hover {
+	transform: scale(1.02);
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	.set-bg {
+		border-radius: 20px 20px 0 0;
+	}
+}
+
+.product__item .set-bg:hover {
+	border-radius: 20px 20px 0 0;
+}
+
+.categories__item:hover {
+	transform: scale(1.01);
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
