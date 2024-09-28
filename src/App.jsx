@@ -9,9 +9,6 @@ import 'reactjs-popup/dist/index.css';
 import WishListOffCanvas from "./component/layout/WishListOffCanvas.jsx";
 
 
-
-
-
 function App({children}) {
     return (
         <ShowOffCanvasContextProvider>

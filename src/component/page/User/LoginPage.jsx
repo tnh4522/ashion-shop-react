@@ -1,4 +1,5 @@
 import {Image} from "cloudinary-react";
+import {Link} from "react-router-dom";
 
 function LoginPage() {
     return (
@@ -6,9 +7,11 @@ function LoginPage() {
             <div className="container-login100">
                 <div className="wrap-login100">
                     <form className="login100-form validate-form">
-                        <span className="login100-form-title p-b-48"><Image cloudName="dhuckb4qt"
-                                                                            publicId="My Brand/logo_as6ugx"
-                                                                            crop="scale"/></span>
+                        <a href="/" className="login100-form-title p-b-48">
+                            <Image cloudName="dhuckb4qt"
+                                   publicId="My Brand/logo_as6ugx"
+                                   crop="scale"/>
+                        </a>
                         <div className="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
                             <input className="input100" type="text" name="email"/>
                             <span className="focus-input100" data-placeholder="Email"></span>
@@ -49,7 +52,7 @@ function LoginPage() {
                         </div>
                         <div className="text-center p-t-25">
                             <span className="txt1">Don’t have an account? </span>
-                            <a className="txt2" href="#"> Sign Up</a>
+                            <Link className="txt2" to="register"> Sign Up</Link>
                         </div>
                     </form>
                 </div>
