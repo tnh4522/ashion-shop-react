@@ -1,25 +1,57 @@
-import {Image} from "cloudinary-react";
-import {Link} from "react-router-dom";
+import React, { useState } from 'react';
+import { Image } from "cloudinary-react";
+import { Link, useNavigate } from "react-router-dom";
+import API from "../../service/service.jsx";
+import { CONFIG_HEADER } from "../../service/config.jsx";
 
 function LoginPage() {
+    const [userName, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (userName === '' || password === '') {
+            setError('All fields are required')
+            return
+        }
+        const data = {
+            username: userName,
+            password: password
+        }
+        try {
+            const response = await API.post('/login', data, CONFIG_HEADER)
+            if (response.status === 200) {
+                navigate('/')
+                localStorage.setItem('data', JSON.stringify(response.data))
+            }
+        } catch (error) {
+            console.log(error)
+            setError(error.response?.data?.message || 'An error occurred')
+        }
+    }
+
     return (
         <div className="limiter">
             <div className="container-login100">
                 <div className="wrap-login100">
-                    <form className="login100-form validate-form">
+                    <form className="login100-form validate-form" onSubmit={handleSubmit}>
                         <a href="/" className="login100-form-title p-b-48">
                             <Image cloudName="dhuckb4qt"
                                    publicId="My Brand/logo_as6ugx"
                                    crop="scale"/>
                         </a>
+                        <p style={{color: 'red'}}>{error}</p>
                         <div className="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
-                            <input className="input100" type="text" name="email"/>
-                            <span className="focus-input100" data-placeholder="Email"></span>
+                            <input className="input100" type="text" name="username" placeholder="Username"
+                                   onChange={(e) => setUserName(e.target.value)} />
                         </div>
                         <div className="wrap-input100 validate-input" data-validate="Enter password">
                             <span className="btn-show-pass"><i className="zmdi zmdi-eye"></i></span>
-                            <input className="input100" type="password" name="pass"/>
-                            <span className="focus-input100" data-placeholder="Password"></span>
+                            <input className="input100" type="password" name="password" placeholder="Password"
+                                   onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className="container-login100-form-btn">
                             <div className="wrap-login100-form-btn">
