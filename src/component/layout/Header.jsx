@@ -2,7 +2,8 @@ import {Link} from "react-router-dom";
 import {Image} from 'cloudinary-react';
 import {AutoComplete, Flex, Input} from 'antd';
 import useShowOffCanvasContext from "../hooks/useShowOffCanvasContext.jsx";
-import {Dropdown} from 'antd';
+import {Dropdown, Menu} from 'antd';
+import {useState} from "react";
 
 const Title = (props) => (
     <Flex align="center" justify="space-between">
@@ -39,7 +40,14 @@ const options = [
 ];
 
 function Header() {
-    const {showMenu, toggleShowMenu, showCart, toggleShowCart, showWishlist, toggleShowWishlist} = useShowOffCanvasContext();
+    const {
+        showMenu,
+        toggleShowMenu,
+        showCart,
+        toggleShowCart,
+        showWishlist,
+        toggleShowWishlist
+    } = useShowOffCanvasContext();
 
     const items = [
         {
@@ -68,6 +76,62 @@ function Header() {
         },
     ];
 
+    const menuItems = [
+        {
+            label: <Link to="/">Home</Link>,
+            key: 'home',
+        },
+        {
+            label: <Link to="/shop">Women’s</Link>,
+            key: 'women',
+        },
+        {
+            label: <Link to="/shop">Men’s</Link>,
+            key: 'men',
+        },
+        {
+            label: <Link to="/shop">Shop</Link>,
+            key: 'shop',
+        },
+        {
+            label: <Link to="/">Pages</Link>,
+            key: 'pages',
+            children: [
+                {
+                    label: <Link to="/product">Product Details</Link>,
+                    key: 'product',
+                },
+                {
+                    label: <Link to="/cart">Shop Cart</Link>,
+                    key: 'cart',
+                },
+                {
+                    label: <Link to="/check-out">Checkout</Link>,
+                    key: 'checkout',
+                },
+                {
+                    label: <Link to="/blog/1">Blog Details</Link>,
+                    key: 'blog-details',
+                },
+            ],
+        },
+        {
+            label: <Link to="/blog">Blog</Link>,
+            key: 'blog',
+        },
+        {
+            label: <Link to="/contact">Contact</Link>,
+            key: 'contact',
+        },
+    ];
+
+    const [current, setCurrent] = useState('home');
+
+    const onClick = (e) => {
+        console.log('click ', e);
+        setCurrent(e.key);
+    };
+
 
     return (
         <header className="header">
@@ -80,24 +144,7 @@ function Header() {
                         </div>
                     </div>
                     <div className="col-xl-5 col-lg-7">
-                        <nav className="header__menu">
-                            <ul>
-                                <li className="active"><Link to="/">Home</Link></li>
-                                <li><Link to="/shop">Women’s</Link></li>
-                                <li><Link to="/shop">Men’s</Link></li>
-                                <li><Link to="shop">Shop</Link></li>
-                                <li><Link to="/">Pages</Link>
-                                    <ul className="dropdown">
-                                        <li><Link to="/product">Product Details</Link></li>
-                                        <li><Link to="/cart">Shop Cart</Link></li>
-                                        <li><Link to="/check-out">Checkout</Link></li>
-                                        <li><Link to="/blog/1">Blog Details</Link></li>
-                                    </ul>
-                                </li>
-                                <li><Link to="/blog">Blog</Link></li>
-                                <li><Link to="/contact">Contact</Link></li>
-                            </ul>
-                        </nav>
+                        <Menu className="header__menu" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuItems} />
                     </div>
                     <div className="col-lg-2">
                         <div className="header__right">
@@ -130,7 +177,8 @@ function Header() {
                                 >
                                     <li><i className="fa-regular fa-user"></i></li>
                                 </Dropdown>
-                                <li><a onClick={() => toggleShowWishlist(!showWishlist)}><span className="icon_heart_alt"></span>
+                                <li><a onClick={() => toggleShowWishlist(!showWishlist)}><span
+                                    className="icon_heart_alt"></span>
                                     <div className="tip">2</div>
                                 </a></li>
                                 <li><a onClick={() => toggleShowCart(!showCart)}><span className="icon_bag_alt"></span>
