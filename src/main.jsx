@@ -13,6 +13,8 @@ import ProductDetail from "./component/page/Product/ProductDetail.jsx";
 import ShopCart from "./component/page/Cart/ShopCart.jsx";
 import LoginPage from "./component/page/User/LoginPage.jsx";
 import RegisterPage from "./component/page/User/RegisterPage.jsx";
+import Categories from "./component/page/Categorie/Categorie.jsx";
+import CategorieProduct from "./component/page/Categorie/CategorieProduct.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -30,6 +32,8 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/check-out" element={<CheckoutPage/>}/>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/register" element={<RegisterPage />}/>
+                    <Route path="/category" element={<Categories/>}/>
+                    <Route path="/category/:id" element={<CategorieProduct/>}/>
                 </Routes>
             </App>
         </Router>
