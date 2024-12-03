@@ -1,8 +1,7 @@
 import {Link} from "react-router-dom";
 import {Image} from 'cloudinary-react';
-import {AutoComplete, Flex, Input, Menu} from 'antd';
+import {AutoComplete, Flex, Input, Dropdown, Menu} from 'antd';
 import useShowOffCanvasContext from "../hooks/useShowOffCanvasContext.jsx";
-import {Dropdown} from 'antd';
 import {useState} from "react";
 
 const Title = (props) => (
@@ -40,7 +39,14 @@ const options = [
 ];
 
 function Header() {
-    const {showMenu, toggleShowMenu, showCart, toggleShowCart, showWishlist, toggleShowWishlist} = useShowOffCanvasContext();
+    const {
+        showMenu,
+        toggleShowMenu,
+        showCart,
+        toggleShowCart,
+        showWishlist,
+        toggleShowWishlist
+    } = useShowOffCanvasContext();
 
     const items = [
         {
@@ -169,7 +175,8 @@ function Header() {
                                 >
                                     <li><i className="fa-regular fa-user"></i></li>
                                 </Dropdown>
-                                <li><a onClick={() => toggleShowWishlist(!showWishlist)}><span className="icon_heart_alt"></span>
+                                <li><a onClick={() => toggleShowWishlist(!showWishlist)}><span
+                                    className="icon_heart_alt"></span>
                                     <div className="tip">2</div>
                                 </a></li>
                                 <li><a onClick={() => toggleShowCart(!showCart)}><span className="icon_bag_alt"></span>
