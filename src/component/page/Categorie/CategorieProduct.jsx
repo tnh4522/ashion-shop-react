@@ -58,7 +58,7 @@ function CategorieProduct() {
                             </ul>
                         </div>
                         <div className="product__item__text">
-                            <h6><Link to={`/product/${product.id}`}>{product.name}</Link></h6>
+                            <h6><Link to={`/product/${product.id}`} state={{ product }}>{product.name}</Link></h6>
                             <div className="rating">
                                 {Array.from({ length: 5 }, (_, i) => (
                                     <i key={i} className={`fa ${i < product.rating ? "fa-star" : "fa-star-o"}`}></i>

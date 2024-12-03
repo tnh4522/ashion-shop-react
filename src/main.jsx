@@ -1,7 +1,7 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import App from './App.jsx'
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import ErrorPage from "./component/layout/ErrorPage.jsx";
 import ContactPage from "./component/page/ContactPage.jsx";
 import BlogPage from "./component/page/Blog/BlogPage.jsx";
@@ -18,13 +18,13 @@ import CategorieProduct from "./component/page/Categorie/CategorieProduct.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <Router>
+        <HashRouter future={{v7_startTransition: true}}>
             <App>
                 <Routes>
                     <Route path="*" element={<ErrorPage/>}/>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/shop" element={<Products/>}/>
-                    <Route path="/product" element={<ProductDetail/>}/>
+                    <Route path="/product/:id" element={<ProductDetail/>}/>
                     <Route path="/cart" element={<ShopCart/>}/>
                     <Route path="/contact" element={<ContactPage/>}/>
                     <Route path="/blog" element={<BlogPage/>}/>
@@ -36,6 +36,6 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/category/:id" element={<CategorieProduct/>}/>
                 </Routes>
             </App>
-        </Router>
+        </HashRouter>
     </StrictMode>
 )
