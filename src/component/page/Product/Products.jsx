@@ -1,10 +1,10 @@
-import React from 'react';
 import {Link} from "react-router-dom";
 import Popup from 'reactjs-popup';
 import {Slider} from 'antd';
+import {useState} from "react";
 
 function Products() {
-    const [value, setValue] = React.useState([20, 80]);
+    const [value, setValue] = useState([20, 80]);
     return (
         <div>
             <div className="breadcrumb-option">

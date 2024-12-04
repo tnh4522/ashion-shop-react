@@ -1,8 +1,7 @@
 import {Link} from "react-router-dom";
 import {Image} from 'cloudinary-react';
-import {AutoComplete, Flex, Input} from 'antd';
+import {AutoComplete, Flex, Input, Dropdown, Menu} from 'antd';
 import useShowOffCanvasContext from "../hooks/useShowOffCanvasContext.jsx";
-import {Dropdown, Menu} from 'antd';
 import {useState} from "react";
 
 const Title = (props) => (
@@ -76,59 +75,57 @@ function Header() {
         },
     ];
 
-    const menuItems = [
+    const itemsNav = [
         {
-            label: <Link to="/">Home</Link>,
+            label: <Link to='/'>Home</Link>,
             key: 'home',
         },
         {
-            label: <Link to="/shop">Women’s</Link>,
+            label: <Link to='/category'>Category</Link>,
+            key: 'category',
+        },
+        {
+            label: <Link to='/shop'>Women’s</Link>,
             key: 'women',
         },
         {
-            label: <Link to="/shop">Men’s</Link>,
+            label: <Link to='/shop'>Men’s</Link>,
             key: 'men',
         },
         {
-            label: <Link to="/shop">Shop</Link>,
+            label: <Link to='/shop'>Shop</Link>,
             key: 'shop',
         },
         {
-            label: <Link to="/">Pages</Link>,
+            label: <Link to='/'>Pages</Link>,
             key: 'pages',
             children: [
                 {
-                    label: <Link to="/product">Product Details</Link>,
+                    label: <Link to='/product'>Product Details</Link>,
                     key: 'product',
                 },
                 {
-                    label: <Link to="/cart">Shop Cart</Link>,
+                    label: <Link to='/cart'>Shop Cart</Link>,
                     key: 'cart',
                 },
                 {
-                    label: <Link to="/check-out">Checkout</Link>,
+                    label: <Link to='/check-out'>Checkout</Link>,
                     key: 'checkout',
                 },
                 {
-                    label: <Link to="/blog/1">Blog Details</Link>,
-                    key: 'blog-details',
+                    label: <Link to='/blog/1'>Blog Details</Link>,
+                    key: 'blog',
                 },
             ],
         },
         {
-            label: <Link to="/blog">Blog</Link>,
-            key: 'blog',
-        },
-        {
-            label: <Link to="/contact">Contact</Link>,
+            label: <Link to='/contact'>Contact</Link>,
             key: 'contact',
         },
     ];
 
-    const [current, setCurrent] = useState('home');
-
+    const [current, setCurrent] = useState('mail');
     const onClick = (e) => {
-        console.log('click ', e);
         setCurrent(e.key);
     };
 
@@ -144,7 +141,7 @@ function Header() {
                         </div>
                     </div>
                     <div className="col-xl-5 col-lg-7">
-                        <Menu className="header__menu" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={menuItems} />
+                        <Menu className="header__menu" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={itemsNav} />
                     </div>
                     <div className="col-lg-2">
                         <div className="header__right">
