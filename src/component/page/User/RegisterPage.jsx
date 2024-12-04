@@ -2,7 +2,7 @@ import {Image} from "cloudinary-react";
 import API from "../../service/service.jsx";
 import React, {useState} from "react";
 import {CONFIG_HEADER} from "../../service/config.jsx";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 
 function RegisterPage() {
     const [userName, setUserName] = useState('')
@@ -31,17 +31,19 @@ function RegisterPage() {
             username: userName,
             email: email,
             password: password,
-            password2: confirmPassword
+            password2: confirmPassword,
+            role:null // 5
         }
         try {
             const response = await API.post('/register', data, CONFIG_HEADER)
             if (response.status === 201) {
-                navigate('/')
+                navigate('/login')
                 localStorage.setItem('data', JSON.stringify(response.data))
             }
         } catch (error) {
+            console.log(data)
             console.log(error)
-            setError(error.message)
+            setError('Email or Username already exists')
         }
     }
     return (
@@ -98,6 +100,7 @@ function RegisterPage() {
                                         <div className="btn-login-with-facebook sub-module">
                                             <img src="/login-form-v2/images/facebook.1024x1024.png" alt="facebook"
                                                  width="25" height="25"/>
+                                                 
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +108,7 @@ function RegisterPage() {
                         </div>
                         <div className="text-center p-t-25">
                             <span className="txt1">Already have an account?</span>
-                            <a className="txt2" href="#"> Login</a>
+                            <Link to="/login"> Login</Link>
                         </div>
                     </form>
                 </div>

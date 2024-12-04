@@ -84,7 +84,7 @@ function LoginPage() {
                         </div>
                         <div className="text-center p-t-25">
                             <span className="txt1">Don’t have an account? </span>
-                            <Link className="txt2" to="register"> Sign Up</Link>
+                            <Link className="txt2" to="/register"> Sign Up</Link>
                         </div>
                     </form>
                 </div>
