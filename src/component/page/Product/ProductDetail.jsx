@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import API from "../../service/service.jsx";
-import {Tabs} from "antd";
+import {Tabs, InputNumber} from "antd";
 import {AppstoreOutlined} from "@ant-design/icons";
+import useNotificationContext from "../../hooks/useNotificationContext.jsx";
+import {addProductToCart} from "../../service/function.jsx";
 
 function ProductDetail() {
     const {id} = useParams();
+    const {openSuccessNotification, openErrorNotification} = useNotificationContext();
     const [activeThumb, setActiveThumb] = useState("");
     const [activeImage, setActiveImage] = useState("");
 
@@ -16,6 +19,7 @@ function ProductDetail() {
     const [selectedColor, setSelectedColor] = useState("");
     const [selectedSize, setSelectedSize] = useState("");
 
+
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -23,8 +27,10 @@ function ProductDetail() {
                 const data = response.data;
                 data.price = parseFloat(data.price);
                 data.sale_price = parseFloat(data.sale_price);
-                data.colors = ["red", "black", "grey"];
-                data.sizes = ["xs", "s", "m", "l"];
+                data.colors = data.colors.split(",");
+                data.colors = data.colors.map((color) => color.toLowerCase());
+                data.sizes = data.sizes.split(",");
+
                 data.inStock = true;
                 data.promotions = ["Free shipping"];
 
@@ -84,8 +90,46 @@ function ProductDetail() {
     };
 
     const handleAddToCart = () => {
-        console.log("Added to cart: ", product.name, "Quantity:", quantity);
+        if (!selectedColor || !selectedSize) {
+            openErrorNotification("Please select color and size");
+            return;
+        }
+
+        const data = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            sale_price: product.sale_price,
+            image: product.images[0].image,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity,
+        }
+
+        addProductToCart(data);
+        openSuccessNotification("Successfully added to cart");
     };
+
+    const handleBuyNow = () => {
+        if (!selectedColor || !selectedSize) {
+            openErrorNotification("Please select color and size");
+            return;
+        }
+
+        const data = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            sale_price: product.sale_price,
+            image: product.images[0].image,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity,
+        }
+
+        addProductToCart(data);
+        window.location.href = "/cart";
+    }
 
     if (!product) {
         return <div id="preloder">
@@ -254,30 +298,30 @@ function ProductDetail() {
                                 <div className="product__details__button">
                                     <div className="quantity">
                                         <span>Quantity:</span>
-                                        <div className="pro-qty">
-                                            <input
-                                                type="text"
-                                                value={quantity}
-                                                onChange={(e) => setQuantity(e.target.value)}
-                                            />
-                                        </div>
+                                        <InputNumber
+                                            className="pro-qty"
+                                            min={1}
+                                            max={99}
+                                            defaultValue={quantity}
+                                            onChange={(value) => setQuantity(value)}
+                                        />
                                     </div>
-                                    <a
-                                        href="#"
+                                    <button
+                                        type="button"
                                         className="cart-btn"
                                         onClick={handleAddToCart}
                                     >
-                                        <span className="icon_bag_alt"></span> Add to cart
-                                    </a>
+                                        <i className="fa-solid fa-cart-shopping"></i> Add to cart
+                                    </button>
                                     <ul>
                                         <li>
-                                            <a href="#">
-                                                <span className="icon_heart_alt"></span>
+                                            <a onClick={handleBuyNow}>
+                                                <span className="icon_bag_alt"></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <span className="icon_adjust-horiz"></span>
+                                                <span className="icon_heart_alt"></span>
                                             </a>
                                         </li>
                                     </ul>
@@ -310,7 +354,6 @@ function ProductDetail() {
                                                             type="radio"
                                                             name="color__radio"
                                                             id={color}
-                                                            // Đánh dấu đã chọn color
                                                             checked={selectedColor === color}
                                                             onChange={() => setSelectedColor(color)}
                                                         />

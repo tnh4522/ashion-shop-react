@@ -3,6 +3,7 @@ import {Image} from 'cloudinary-react';
 import {AutoComplete, Flex, Input, Dropdown, Menu} from 'antd';
 import useShowOffCanvasContext from "../hooks/useShowOffCanvasContext.jsx";
 import {useState} from "react";
+import useUserContext from "../hooks/useUserContext.jsx";
 
 const Title = (props) => (
     <Flex align="center" justify="space-between">
@@ -39,6 +40,7 @@ const options = [
 ];
 
 function Header() {
+    const {userData, logout} = useUserContext();
     const {
         showMenu,
         toggleShowMenu,
@@ -52,25 +54,19 @@ function Header() {
         {
             key: '1',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                    1st menu item
-                </a>
+                <a target="_blank" rel="noopener noreferrer">My Account</a>
             ),
         },
         {
             key: '2',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-                    2nd menu item
-                </a>
+                <a target="_blank" rel="noopener noreferrer">Order History</a>
             ),
         },
         {
             key: '3',
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-                    3rd menu item
-                </a>
+                <a onClick={logout} rel="noopener noreferrer">Logout</a>
             ),
         },
     ];
@@ -129,19 +125,19 @@ function Header() {
         setCurrent(e.key);
     };
 
-
+    console.log(userData)
     return (
         <header className="header">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-xl-2 col-lg-2">
                         <div className="header__logo">
-                            <Link to="/"><Image cloudName="dhuckb4qt" publicId="My Brand/logo_as6ugx"
-                                                crop="scale"/></Link>
+                            <Link to="/"><Image cloudName="dhuckb4qt" publicId="My Brand/logo_as6ugx" crop="scale"/></Link>
                         </div>
                     </div>
                     <div className="col-xl-5 col-lg-7">
-                        <Menu className="header__menu" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={itemsNav} />
+                        <Menu className="header__menu" onClick={onClick} selectedKeys={[current]} mode="horizontal"
+                              items={itemsNav}/>
                     </div>
                     <div className="col-lg-2">
                         <div className="header__right">
@@ -158,26 +154,21 @@ function Header() {
                     </div>
                     <div className="col-lg-3">
                         <div className="header__right">
-                            <div className="header__right__auth">
-                                <Link to="/login">Login</Link>
-                                <Link to="/register">Register</Link>
-                            </div>
                             <ul className="header__right__widget">
-                                <Dropdown
-                                    menu={{
-                                        items,
-                                    }}
-                                    placement="bottomRight"
-                                    arrow={{
-                                        pointAtCenter: true,
-                                    }}
-                                >
-                                    <li><i className="fa-regular fa-user"></i></li>
-                                </Dropdown>
-                                <li><a onClick={() => toggleShowWishlist(!showWishlist)}><span
-                                    className="icon_heart_alt"></span>
-                                    <div className="tip">2</div>
-                                </a></li>
+                                {userData ? (
+                                    <Dropdown
+                                        menu={{items}}
+                                        placement="bottomRight"
+                                        arrow={{pointAtCenter: true}}
+                                    >
+                                        <li><i className="fa-regular fa-user"></i></li>
+                                    </Dropdown>) : <li><Link to='login'><i className="fa-regular fa-user"></i></Link></li>}
+                                <li>
+                                    <a onClick={() => toggleShowWishlist(!showWishlist)}>
+                                        <span className="icon_heart_alt"></span>
+                                        <div className="tip">2</div>
+                                    </a>
+                                </li>
                                 <li><a onClick={() => toggleShowCart(!showCart)}><span className="icon_bag_alt"></span>
                                     <div className="tip">2</div>
                                 </a></li>

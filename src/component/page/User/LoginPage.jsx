@@ -24,7 +24,7 @@ function LoginPage() {
         try {
             const response = await API.post('/login', data, CONFIG_HEADER)
             if (response.status === 200) {
-                navigate('/')
+                window.location.href = '/'
                 localStorage.setItem('data', JSON.stringify(response.data))
             }
         } catch (error) {
