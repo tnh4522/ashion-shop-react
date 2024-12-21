@@ -1,7 +1,6 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import API from "../../service/service.jsx";
 import {Link} from "react-router-dom";
-import convertUrl from "../../service/function.jsx";
 
 function Categories() {
     const [categories, setCategories] = useState([]);
@@ -41,14 +40,16 @@ function Categories() {
                     categories.map((category, index) => (
                         <div className="col text-center" key={index}>
                             <Link to={`/category/${category.id}`}>
-                                <img src={convertUrl(category.image)} alt={category.name}
+                                <img src={category.image} alt={category.name}
                                      className="image_categories"/>
                             </Link>
                             <h5>{category.name}</h5>
                         </div>
                     ))
                 ) : (
-                    <p>Loading categories...</p>
+                    <div id="preloder">
+                        <div className="loader"></div>
+                    </div>
                 )}
             </div>
         </div>
