@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import API from "../../service/service.jsx";
 import {Tabs, InputNumber} from "antd";
 import {AppstoreOutlined} from "@ant-design/icons";
@@ -8,6 +8,7 @@ import {addProductToCart} from "../../service/function.jsx";
 
 function ProductDetail() {
     const {id} = useParams();
+    const navigator = useNavigate();
     const {openSuccessNotification, openErrorNotification} = useNotificationContext();
     const [activeThumb, setActiveThumb] = useState("");
     const [activeImage, setActiveImage] = useState("");
@@ -128,7 +129,7 @@ function ProductDetail() {
         }
 
         addProductToCart(data);
-        window.location.href = "/cart";
+        navigator("/cart");
     }
 
     if (!product) {
@@ -315,7 +316,7 @@ function ProductDetail() {
                                     </button>
                                     <ul>
                                         <li>
-                                            <a onClick={handleBuyNow}>
+                                            <a onClick={handleBuyNow} href="javascript:void(0)">
                                                 <span className="icon_bag_alt"></span>
                                             </a>
                                         </li>

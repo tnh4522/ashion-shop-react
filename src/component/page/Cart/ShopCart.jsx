@@ -1,7 +1,57 @@
 import {Link} from "react-router-dom";
-import {InputNumber} from "antd";
+import {Button, Empty, Typography, InputNumber} from 'antd';
 
 function ShopCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const renderCart = () => {
+        if (cart.length === 0) {
+            return <Empty
+                image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                imageStyle={{
+                    height: 60,
+                }}
+                description={
+                    <Typography.Text>
+                        Customize <a href="#API">Description</a>
+                    </Typography.Text>
+                }
+            >
+                <Button type="primary">Create Now</Button>
+            </Empty>
+        } else {
+            return cart.map((p, index) => {
+                return <tr key={index}>
+                    <td className="cart__product__item">
+                        <img src={p.image} alt="" width="80"/>
+                        <div className="cart__product__item__title">
+                            <h6>{p.name}</h6>
+                            <div className="rating">
+                                {Array.from({length: 5}, (v, i) => {
+                                    return <i key={i} className={`fa fa-star${i < p.rating ? '' : '-o'}`}></i>
+                                })}
+                            </div>
+                        </div>
+                    </td>
+                    <td className="cart__price">${p.price}</td>
+                    <td className="cart__quantity">
+                        <InputNumber
+                            style={{width: 60}}
+                            min={1}
+                            max={100}
+                            keyboard={true}
+                            defaultValue={p.quantity}
+                            size="small"
+                        />
+                    </td>
+                    <td className="cart__total">${p.price * p.quantity}</td>
+                    <td className="cart__close">
+                        <span className="icon_close" onClick={() => removeProduct(p.id)}></span>
+                    </td>
+                </tr>
+            })
+        }
+    }
     return (
         <div>
             <div className="breadcrumb-option">
@@ -32,118 +82,7 @@ function ShopCart() {
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td className="cart__product__item">
-                                            <img src="/ashion-master/img/shop-cart/cp-1.jpg" alt=""/>
-                                            <div className="cart__product__item__title">
-                                                <h6>Chain bucket bag</h6>
-                                                <div className="rating">
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cart__price">$ 150.0</td>
-                                        <td className="cart__quantity">
-                                            <InputNumber
-                                                style={{width: 60}}
-                                                min={1}
-                                                max={100} k
-                                                eyboard={true}
-                                                defaultValue={3}
-                                                size="small"
-                                            />
-                                        </td>
-                                        <td className="cart__total">$ 300.0</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="cart__product__item">
-                                            <img src="/ashion-master/img/shop-cart/cp-2.jpg" alt=""/>
-                                            <div className="cart__product__item__title">
-                                                <h6>Zip-pockets pebbled tote briefcase</h6>
-                                                <div className="rating">
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cart__price">$ 170.0</td>
-                                        <td className="cart__quantity">
-                                            <InputNumber
-                                                style={{width: 60}}
-                                                min={1}
-                                                max={100} k
-                                                eyboard={true}
-                                                defaultValue={3}
-                                                size="small"
-                                            />
-                                        </td>
-                                        <td className="cart__total">$ 170.0</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="cart__product__item">
-                                            <img src="/ashion-master/img/shop-cart/cp-3.jpg" alt=""/>
-                                            <div className="cart__product__item__title">
-                                                <h6>Black jean</h6>
-                                                <div className="rating">
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cart__price">$ 85.0</td>
-                                        <td className="cart__quantity">
-                                            <InputNumber
-                                                style={{width: 60}}
-                                                min={1}
-                                                max={100} k
-                                                eyboard={true}
-                                                defaultValue={3}
-                                                size="small"
-                                            />
-                                        </td>
-                                        <td className="cart__total">$ 170.0</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="cart__product__item">
-                                            <img src="/ashion-master/img/shop-cart/cp-4.jpg" alt=""/>
-                                            <div className="cart__product__item__title">
-                                                <h6>Cotton Shirt</h6>
-                                                <div className="rating">
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                    <i className="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cart__price">$ 55.0</td>
-                                        <td className="cart__quantity">
-                                            <InputNumber
-                                                style={{width: 60}}
-                                                min={1}
-                                                max={100} k
-                                                eyboard={true}
-                                                defaultValue={3}
-                                                size="small"
-                                            />
-                                        </td>
-                                        <td className="cart__total">$ 110.0</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
-                                    </tr>
+                                    {renderCart()}
                                     </tbody>
                                 </table>
                             </div>
