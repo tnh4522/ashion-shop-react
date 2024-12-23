@@ -7,18 +7,24 @@ import CartOffCanvas from "./component/layout/CartOffCanvas.jsx";
 
 import 'reactjs-popup/dist/index.css';
 import WishListOffCanvas from "./component/layout/WishListOffCanvas.jsx";
+import NotificationContextProvider from "./component/contexts/NotificationContext.jsx";
+import UserContextProvider from "./component/contexts/UserContext.jsx";
 
 
 function App({children}) {
     return (
-        <ShowOffCanvasContextProvider>
-            <CartOffCanvas/>
-            <MenuOffcanvas/>
-            <WishListOffCanvas/>
-            <Header/>
-            {children}
-            <Footer/>
-        </ShowOffCanvasContextProvider>
+        <NotificationContextProvider>
+            <UserContextProvider>
+                <ShowOffCanvasContextProvider>
+                    <CartOffCanvas/>
+                    <MenuOffcanvas/>
+                    <WishListOffCanvas/>
+                    <Header/>
+                    {children}
+                    <Footer/>
+                </ShowOffCanvasContextProvider>
+            </UserContextProvider>
+        </NotificationContextProvider>
     )
 }
 

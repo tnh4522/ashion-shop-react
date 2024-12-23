@@ -1,6 +1,30 @@
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 function CheckoutPage() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const [total, setTotal] = useState(0);
+    const renderCart = cart.map((product, index) => {
+        return (
+            <li key={index}>
+                {product.quantity} - {product.name} <span>$ {product.price * product.quantity}</span>
+            </li>
+        )
+    });
+
+    const calculateTotal = () => {
+        let total = 0;
+        cart.forEach(p => {
+            total += p.price * p.quantity;
+        });
+        total = parseFloat(total);
+        setTotal(total.toFixed(2));
+    }
+
+    useEffect(() => {
+        calculateTotal();
+    }, []);
+
     return (
         <div>
             <div className="breadcrumb-option">
@@ -9,7 +33,8 @@ function CheckoutPage() {
                         <div className="col-lg-12">
                             <div className="breadcrumb__links">
                                 <Link to="/" className="breadcrumb__item"><i className="fa fa-home"></i> Home</Link>
-                                <span>Shopping cart</span>
+                                <Link to="/cart" className="breadcrumb__item">Shopping cart</Link>
+                                <span>Checkout</span>
                             </div>
                         </div>
                     </div>
@@ -114,16 +139,12 @@ function CheckoutPage() {
                                                 <span className="top__text">Product</span>
                                                 <span className="top__text__right">Total</span>
                                             </li>
-                                            <li>01. Chain buck bag <span>$ 300.0</span></li>
-                                            <li>02. Zip-pockets pebbled<br/> tote briefcase <span>$ 170.0</span></li>
-                                            <li>03. Black jean <span>$ 170.0</span></li>
-                                            <li>04. Cotton shirt <span>$ 110.0</span></li>
+                                            {renderCart}
                                         </ul>
                                     </div>
                                     <div className="checkout__order__total">
                                         <ul>
-                                            <li>Subtotal <span>$ 750.0</span></li>
-                                            <li>Total <span>$ 750.0</span></li>
+                                            <li>Total <span>$ {total}</span></li>
                                         </ul>
                                     </div>
                                     <div className="checkout__order__widget">

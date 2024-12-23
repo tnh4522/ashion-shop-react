@@ -1,9 +1,8 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import API from "../../service/service.jsx";
 import {Link, useParams} from "react-router-dom";
 import {Slider} from "antd";
 import Popup from "reactjs-popup";
-import convertUrl from "../../service/function.jsx";
 
 function CategorieProduct() {
     const [products, setProducts] = useState([]);
@@ -25,7 +24,7 @@ function CategorieProduct() {
 
     const renderProduct = () => {
         if (!products || products.length === 0) {
-            return <p>Loading products...</p>;
+            return <div id="preloder"><div className="loader"></div></div>;
         }
 
         return products
@@ -36,7 +35,7 @@ function CategorieProduct() {
                         <div
                             className="product__item__pic set-bg"
                             style={{
-                                backgroundImage: `url(${convertUrl(product.main_image)})`,
+                                backgroundImage: `url(${product.main_image})`,
                             }}
                         >
                             {product.is_new && <div className="label new">New</div>}
@@ -45,11 +44,11 @@ function CategorieProduct() {
                                 <li>
                                     <Popup
                                         trigger={<a><span className="arrow_expand"></span></a>}
-                                        contentStyle={{ width: 350, border: "none", borderRadius: 15 }}
+                                        contentStyle={{width: 350, border: "none", borderRadius: 15}}
                                         modal
                                     >
                                         <div className="popup-image">
-                                            <img src={convertUrl(product.main_image)} alt={product.name} />
+                                            <img src={product.main_image} alt={product.name}/>
                                         </div>
                                     </Popup>
                                 </li>
@@ -58,9 +57,9 @@ function CategorieProduct() {
                             </ul>
                         </div>
                         <div className="product__item__text">
-                            <h6><Link to={`/product/${product.id}`} state={{ product }}>{product.name}</Link></h6>
+                            <h6><Link to={`/product/${product.id}`} state={{product}}>{product.name}</Link></h6>
                             <div className="rating">
-                                {Array.from({ length: 5 }, (_, i) => (
+                                {Array.from({length: 5}, (_, i) => (
                                     <i key={i} className={`fa ${i < product.rating ? "fa-star" : "fa-star-o"}`}></i>
                                 ))}
                             </div>
@@ -76,7 +75,6 @@ function CategorieProduct() {
             ));
     };
 
-
     return (
         <div>
             <div className="breadcrumb-option">
@@ -86,7 +84,7 @@ function CategorieProduct() {
                             <div className="breadcrumb__links">
                                 <Link className="breadcrumb__item" to="/"><i className="fa fa-home"></i> Home</Link>
                                 <Link className="breadcrumb__item" to="/category">Category</Link>
-                                <span>Shop</span>
+                                <span>Products</span>
                             </div>
                         </div>
                     </div>
