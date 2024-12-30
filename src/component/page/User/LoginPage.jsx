@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Image } from "cloudinary-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../../service/service.jsx";
 import { CONFIG_HEADER } from "../../service/config.jsx";
 
@@ -8,8 +8,6 @@ function LoginPage() {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -25,7 +23,7 @@ function LoginPage() {
             const response = await API.post('/login', data, CONFIG_HEADER)
             if (response.status === 200) {
                 window.location.href = '/'
-                localStorage.setItem('data', JSON.stringify(response.data))
+                localStorage.setItem('user', JSON.stringify(response.data))
             }
         } catch (error) {
             console.log(error)
@@ -84,7 +82,7 @@ function LoginPage() {
                         </div>
                         <div className="text-center p-t-25">
                             <span className="txt1">Don’t have an account? </span>
-                            <Link className="txt2" to="register"> Sign Up</Link>
+                            <Link className="txt2" to="/register"> Sign Up</Link>
                         </div>
                     </form>
                 </div>

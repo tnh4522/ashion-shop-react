@@ -15,6 +15,11 @@ import LoginPage from "./component/page/User/LoginPage.jsx";
 import RegisterPage from "./component/page/User/RegisterPage.jsx";
 import Categories from "./component/page/Categorie/Categorie.jsx";
 import CategorieProduct from "./component/page/Categorie/CategorieProduct.jsx";
+import MyAccount from "./component/page/Account/Account.jsx";
+import AccountInfo from "./component/page/Account/components/AccountInfo.jsx";
+import Orders from "./component/page/Account/components/Orders.jsx";
+import Addresses from "./component/page/Account/components/Addresses.jsx";
+import Logout from "./component/page/Account/components/Logout.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -34,6 +39,13 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/register" element={<RegisterPage />}/>
                     <Route path="/category" element={<Categories/>}/>
                     <Route path="/category/:id" element={<CategorieProduct/>}/>
+                    <Route path="/account/*" element={<MyAccount />}>
+                        <Route index element={<AccountInfo />} />
+                        <Route path="info" element={<AccountInfo />} />
+                        <Route path="orders" element={<Orders />} />
+                        <Route path="addresses" element={<Addresses />} />
+                        <Route path="logout" element={<Logout />} />
+                    </Route>
                 </Routes>
             </App>
         </HashRouter>

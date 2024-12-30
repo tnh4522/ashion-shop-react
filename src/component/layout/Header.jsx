@@ -54,7 +54,7 @@ function Header() {
         {
             key: '1',
             label: (
-                <a target="_blank" rel="noopener noreferrer">My Account</a>
+                <Link to='/account'>My Account</Link>
             ),
         },
         {
@@ -125,7 +125,6 @@ function Header() {
         setCurrent(e.key);
     };
 
-    console.log(userData)
     return (
         <header className="header">
             <div className="container-fluid">

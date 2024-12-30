@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 function UserContextProvider({children}) {
     const [userData, setUserData] = useState(() => {
-        const data = localStorage.getItem('data');
+        const data = localStorage.getItem('user');
         return data ? JSON.parse(data) : null;
     });
 
@@ -17,7 +17,7 @@ function UserContextProvider({children}) {
     }, [userData]);
 
     const logout = () => {
-        localStorage.removeItem('data');
+        localStorage.removeItem('user');
         setUserData(null);
         window.location.reload(); // Reload the page to reset the state/UI
     };

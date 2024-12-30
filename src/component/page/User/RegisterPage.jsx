@@ -37,7 +37,7 @@ function RegisterPage() {
             const response = await API.post('/register', data, CONFIG_HEADER)
             if (response.status === 201) {
                 navigate('/')
-                localStorage.setItem('data', JSON.stringify(response.data))
+                localStorage.setItem('user', JSON.stringify(response.data))
             }
         } catch (error) {
             console.log(error)
