@@ -7,6 +7,7 @@ const ShowOffCanvasContextProvider = ({children}) => {
 
     const [showMenu, setShowMenu] = useState(false);
     const [showCart, setShowCart] = useState(false);
+    const [loadCart, setLoadCart] = useState(false);
     const [showWishlist, setShowWishlist] = useState(false);
 
     const toggleShowMenu = (showMenu) => {
@@ -14,6 +15,7 @@ const ShowOffCanvasContextProvider = ({children}) => {
     };
 
     const toggleShowCart = (showCart) => {
+        setLoadCart(showCart);
         setShowCart(showCart);
     };
 
@@ -25,7 +27,7 @@ const ShowOffCanvasContextProvider = ({children}) => {
         value={{
             showMenu, toggleShowMenu,
             showCart, toggleShowCart,
-            showWishlist, toggleShowWishlist
+            showWishlist, toggleShowWishlist, loadCart
         }}>{children}</ShowOffCanvasContext.Provider>
 }
 

@@ -45,7 +45,7 @@ const MyAccount = () => {
     return (
         <div style={{ display: 'flex', minHeight: '100vh' }}>
             {/* Sidebar Menu */}
-            <div style={{ width: 256, padding: '20px', background: '#f0f2f5' }}>
+            <div style={{ width: 325, padding: '20px', background: '#f0f2f5' }}>
                 <Menu
                     onClick={handleMenuClick}
                     selectedKeys={[selectedKey]}

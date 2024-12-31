@@ -2480,6 +2480,14 @@ ol {
     padding-bottom: 22px;
 }
 
+.checkout__order__product ul {
+    padding-left: 0;
+}
+
+.checkout__order__total ul {
+    padding-left: 0;
+}
+
 .checkout__order__product ul li {
     list-style: none;
     font-size: 14px;
