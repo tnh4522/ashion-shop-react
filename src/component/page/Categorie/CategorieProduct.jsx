@@ -10,6 +10,7 @@ function CategorieProduct() {
     const [value, setValue] = useState([20, 80]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchProducts = async () => {
             try {
                 const response = await API.get("product/list/");

@@ -275,7 +275,7 @@ function CheckoutPage() {
 
             if (response.status === 201) {
                 localStorage.setItem('order', JSON.stringify(response.data));
-                openSuccessNotification('Đơn hàng được tạo thành công');
+                openSuccessNotification('Order created successfully.');
 
                 if (response.data.payment) {
                     window.location.href = `https://demo.vivapayments.com/web2?ref=${response.data.payment.orderCode}`;
@@ -287,11 +287,11 @@ function CheckoutPage() {
             }
         } catch (error) {
             if (error.response && error.response.status === 401) {
-                openErrorNotification("Truy cập không hợp lệ. Vui lòng đăng nhập lại.");
+                openErrorNotification("Error creating order: You need to login to create an order.");
                 logout();
                 return;
             }
-            openErrorNotification('Có lỗi xảy ra khi tạo đơn hàng.');
+            openErrorNotification('Error creating order. Please try again later.');
             console.error('Error creating order:', error);
         }
     };
