@@ -4254,4 +4254,42 @@ a {
     transition: all .5s ease;
 }
 
+/*---------------------
+  Checkout Form Select
+-----------------------*/
+.checkout__form__select {
+    margin-bottom: 25px;
+}
+
+.checkout__form__select p {
+    font-size: 14px;
+    color: #444444;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.checkout__form__select select {
+    height: 50px;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-radius: 2px;
+    padding-left: 20px;
+    font-size: 14px;
+    color: #666666;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.checkout__form__select select:disabled {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+.checkout__form__select select:focus {
+    outline: none;
+    border-color: #ca1515;
+}
+
+
+
 
