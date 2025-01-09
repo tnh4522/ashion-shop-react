@@ -14,8 +14,8 @@ import {CartProvider} from "./component/contexts/CartContext.jsx";
 function App({children}) {
     return (
         <NotificationContextProvider>
-            <CartProvider>
-                <UserContextProvider>
+            <UserContextProvider>
+                <CartProvider>
                     <ShowOffCanvasContextProvider>
                         <CartOffCanvas/>
                         <MenuOffcanvas/>
@@ -24,8 +24,8 @@ function App({children}) {
                         {children}
                         <Footer/>
                     </ShowOffCanvasContextProvider>
-                </UserContextProvider>
-            </CartProvider>
+                </CartProvider>
+            </UserContextProvider>
         </NotificationContextProvider>
     )
 }

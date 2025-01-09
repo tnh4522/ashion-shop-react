@@ -110,7 +110,6 @@ function ProductDetail() {
         }
 
         addToCart(data);
-        openSuccessNotification("Successfully added to cart");
     };
 
     const handleBuyNow = () => {

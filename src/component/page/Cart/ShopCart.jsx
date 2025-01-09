@@ -6,6 +6,7 @@ function ShopCart() {
     const [cart, setCart] = useState(() => {
         return JSON.parse(localStorage.getItem('cart')) || [];
     });
+
     const navigate = useNavigate();
 
     const [total, setTotal] = useState(0);
