@@ -25,7 +25,9 @@ function CategorieProduct() {
 
     const renderProduct = () => {
         if (!products || products.length === 0) {
-            return <div id="preloder"><div className="loader"></div></div>;
+            return <div id="preloder">
+                <div className="loader"></div>
+            </div>;
         }
 
         return products

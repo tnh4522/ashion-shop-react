@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import API from "../../service/service.jsx";
 import {Tabs, InputNumber} from "antd";
 import {AppstoreOutlined} from "@ant-design/icons";
 import useNotificationContext from "../../hooks/useNotificationContext.jsx";
-import {addProductToCart} from "../../service/function.jsx";
+import {CartContext} from "../../contexts/CartContext.jsx";
 
 function ProductDetail() {
     const {id} = useParams();
@@ -20,8 +20,10 @@ function ProductDetail() {
     const [selectedColor, setSelectedColor] = useState("");
     const [selectedSize, setSelectedSize] = useState("");
 
+    const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchProduct = async () => {
             try {
                 const response = await API.get(`product/detail/${id}`);
@@ -107,7 +109,7 @@ function ProductDetail() {
             quantity: quantity,
         }
 
-        addProductToCart(data);
+        addToCart(data);
         openSuccessNotification("Successfully added to cart");
     };
 
@@ -128,7 +130,7 @@ function ProductDetail() {
             quantity: quantity,
         }
 
-        addProductToCart(data);
+        addToCart(data);
         navigator("/cart");
     }
 

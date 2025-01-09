@@ -1,9 +1,11 @@
+// src/components/Header.jsx
 import {Link} from "react-router-dom";
 import {Image} from 'cloudinary-react';
 import {AutoComplete, Flex, Input, Dropdown, Menu} from 'antd';
 import useShowOffCanvasContext from "../hooks/useShowOffCanvasContext.jsx";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import useUserContext from "../hooks/useUserContext.jsx";
+import {CartContext} from '../contexts/CartContext.jsx';
 
 const Title = (props) => (
     <Flex align="center" justify="space-between">
@@ -19,8 +21,8 @@ const renderItem = (title, count) => ({
         <Flex align="center" justify="space-between">
             {title}
             <span>
-         {count}
-      </span>
+                {count}
+            </span>
         </Flex>
     ),
 });
@@ -49,6 +51,8 @@ function Header() {
         showWishlist,
         toggleShowWishlist
     } = useShowOffCanvasContext();
+
+    const {totalCart} = useContext(CartContext);
 
     const items = [
         {
@@ -131,7 +135,8 @@ function Header() {
                 <div className="row">
                     <div className="col-xl-2 col-lg-2">
                         <div className="header__logo">
-                            <Link to="/"><Image cloudName="dhuckb4qt" publicId="My Brand/logo_as6ugx" crop="scale"/></Link>
+                            <Link to="/"><Image cloudName="dhuckb4qt" publicId="My Brand/logo_as6ugx"
+                                                crop="scale"/></Link>
                         </div>
                     </div>
                     <div className="col-xl-5 col-lg-7">
@@ -155,13 +160,14 @@ function Header() {
                         <div className="header__right">
                             <ul className="header__right__widget">
                                 {userData ? (
-                                    <Dropdown
-                                        menu={{items}}
-                                        placement="bottomRight"
-                                        arrow={{pointAtCenter: true}}
-                                    >
-                                        <li><i className="fa-regular fa-user"></i></li>
-                                    </Dropdown>) : <li><Link to='login'><i className="fa-regular fa-user"></i></Link></li>}
+                                        <Dropdown
+                                            menu={{items}}
+                                            placement="bottomRight"
+                                            arrow={{pointAtCenter: true}}
+                                        >
+                                            <li><i className="fa-regular fa-user"></i></li>
+                                        </Dropdown>) :
+                                    <li><Link to='login'><i className="fa-regular fa-user"></i></Link></li>}
                                 <li>
                                     <a onClick={() => toggleShowWishlist(!showWishlist)}>
                                         <span className="icon_heart_alt"></span>
@@ -169,7 +175,7 @@ function Header() {
                                     </a>
                                 </li>
                                 <li><a onClick={() => toggleShowCart(!showCart)}><span className="icon_bag_alt"></span>
-                                    <div className="tip">2</div>
+                                    <div className="tip">{totalCart}</div>
                                 </a></li>
                             </ul>
                         </div>
@@ -179,9 +185,8 @@ function Header() {
                     <i className="fa fa-bars"></i>
                 </div>
             </div>
-
         </header>
     )
 }
 
-export default Header
+export default Header;

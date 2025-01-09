@@ -8,21 +8,24 @@ import 'reactjs-popup/dist/index.css';
 import WishListOffCanvas from "./component/layout/WishListOffCanvas.jsx";
 import NotificationContextProvider from "./component/contexts/NotificationContext.jsx";
 import UserContextProvider from "./component/contexts/UserContext.jsx";
+import {CartProvider} from "./component/contexts/CartContext.jsx";
 
 
 function App({children}) {
     return (
         <NotificationContextProvider>
-            <UserContextProvider>
-                <ShowOffCanvasContextProvider>
-                    <CartOffCanvas/>
-                    <MenuOffcanvas/>
-                    <WishListOffCanvas/>
-                    <Header/>
-                    {children}
-                    <Footer/>
-                </ShowOffCanvasContextProvider>
-            </UserContextProvider>
+            <CartProvider>
+                <UserContextProvider>
+                    <ShowOffCanvasContextProvider>
+                        <CartOffCanvas/>
+                        <MenuOffcanvas/>
+                        <WishListOffCanvas/>
+                        <Header/>
+                        {children}
+                        <Footer/>
+                    </ShowOffCanvasContextProvider>
+                </UserContextProvider>
+            </CartProvider>
         </NotificationContextProvider>
     )
 }
