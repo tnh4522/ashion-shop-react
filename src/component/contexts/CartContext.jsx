@@ -145,6 +145,7 @@ export const CartProvider = ({children}) => {
                 await API.delete(`/cart/items/${itemId}/`);
                 setCart((prevCart) => prevCart.filter(item => item.id !== itemId));
                 openSuccessNotification('Cart item removed!');
+                fetchCart();
             } else {
                 // Người dùng không đăng nhập: xóa khỏi localStorage
                 setCart((prevCart) => prevCart.filter(item => item.id !== itemId));

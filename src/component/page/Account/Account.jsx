@@ -56,15 +56,6 @@ const MyAccount = () => {
             </div>
 
             <div style={{ flex: 1, padding: '20px' }}>
-                {/* Breadcrumb */}
-                <Breadcrumb style={{ marginBottom: '20px' }}>
-                    <Breadcrumb.Item>
-                        <a href="/">
-                            <HomeOutlined /> Home
-                        </a>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item>My Account</Breadcrumb.Item>
-                </Breadcrumb>
                 <Outlet />
             </div>
         </div>

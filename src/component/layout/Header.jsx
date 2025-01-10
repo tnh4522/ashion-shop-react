@@ -171,7 +171,7 @@ function Header() {
                                 <li>
                                     <a onClick={() => toggleShowWishlist(!showWishlist)}>
                                         <span className="icon_heart_alt"></span>
-                                        <div className="tip">2</div>
+                                        <div className="tip">4</div>
                                     </a>
                                 </li>
                                 <li><a onClick={() => toggleShowCart(!showCart)}><span className="icon_bag_alt"></span>
