@@ -64,7 +64,7 @@ function Header() {
         {
             key: '2',
             label: (
-                <a target="_blank" rel="noopener noreferrer">Order History</a>
+                <Link to='/account/orders'>Order History</Link>
             ),
         },
         {

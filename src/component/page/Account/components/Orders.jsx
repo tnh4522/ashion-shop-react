@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import API from "../../../service/service.jsx";
 import useUserContext from "../../../hooks/useUserContext.jsx";
 import './Orders.css';
-import { Flex, Tag, Pagination, message } from "antd";
+import {Flex, Tag, Pagination, message, Input} from "antd";
+import Search from "antd/es/input/Search.js";
+import debounce from 'lodash.debounce';
 
 function Orders() {
     const { userData, logout } = useUserContext();
@@ -13,8 +15,10 @@ function Orders() {
     const [error, setError] = useState(null);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(5); // Số đơn hàng mỗi trang
+    const [pageSize, setPageSize] = useState(5);
     const [totalOrders, setTotalOrders] = useState(0);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
     const auth = {
         headers: {
@@ -33,11 +37,11 @@ function Orders() {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedTab, filterDate]);
+    }, [selectedTab, filterDate, debouncedSearchTerm]);
 
     useEffect(() => {
         fetchOrders();
-    }, [selectedTab, filterDate, currentPage, pageSize]);
+    }, [selectedTab, filterDate, currentPage, pageSize, debouncedSearchTerm]);
 
     const fetchOrders = () => {
         setLoading(true);
@@ -55,6 +59,10 @@ function Orders() {
 
         if (filterDate) {
             params.date = filterDate;
+        }
+
+        if (debouncedSearchTerm) {
+            params.search = debouncedSearchTerm;
         }
 
         API.get('orders/user/', { headers: auth.headers, params })
@@ -132,15 +140,36 @@ function Orders() {
         setPageSize(newPageSize);
     };
 
+    const debounceSearch = useCallback(
+        debounce((value) => {
+            setDebouncedSearchTerm(value);
+        }, 1000),
+        []
+    );
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+        debounceSearch(e.target.value);
+    };
+
     return (
         <div>
-            <div className="filter-bar">
-                <input
+            <div className="filter-bar" style={{display: 'flex', alignItems: 'center', marginBottom: '20px'}}>
+                <Input
                     type="date"
                     value={filterDate}
                     onChange={(e) => setFilterDate(e.target.value)}
+                    style={{marginRight: '20px', width: '200px'}}
                 />
-                {/* Thêm các phần tử lọc khác nếu cần */}
+                <Search
+                    placeholder="Search orders by ID or product name"
+                    allowClear
+                    enterButton="Search"
+                    size="middle"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    style={{width: 500}}
+                />
             </div>
 
             <div className="tabs">
@@ -164,7 +193,9 @@ function Orders() {
                     {orders.map(order => (
                         <div key={order.id} className="order">
                             {/* Kiểm tra items trước khi truy cập */}
-                            <img src={order.items && order.items.length > 0 ? (order.items[0].product_image || 'default.jpg') : 'default.jpg'} alt={order.items && order.items.length > 0 ? order.items[0].product_name : 'Product'} />
+                            <img
+                                src={order.items && order.items.length > 0 ? (order.items[0].product_image || 'default.jpg') : 'default.jpg'}
+                                alt={order.items && order.items.length > 0 ? order.items[0].product_name : 'Product'}/>
                             <div className="order-info">
                                 <Flex>
                                     <h3>{order.items && order.items.length > 0 ? order.items[0].product_name : 'Unnamed Product'}</h3>
@@ -181,7 +212,7 @@ function Orders() {
                         </div>
                     ))}
 
-                    <div style={{ textAlign: 'center', marginTop: '20px' }} className="pagination">
+                    <div style={{textAlign: 'center', marginTop: '20px'}} className="pagination">
                         <Pagination
                             current={currentPage}
                             pageSize={pageSize}
