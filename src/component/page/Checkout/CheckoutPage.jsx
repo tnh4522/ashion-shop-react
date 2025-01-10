@@ -71,7 +71,7 @@ function CheckoutPage() {
     const renderCart = cart.map((product, index) => {
         return (
             <li key={index}>
-                {product.quantity} - {product.name} <span>${(product.price * product.quantity).toFixed(2)}</span>
+                {product.quantity} - {product.product_name} <span>${(product.price * product.quantity).toFixed(2)}</span>
             </li>
         )
     });
@@ -94,7 +94,7 @@ function CheckoutPage() {
             shipping_cost: formatPrice(shippingCost),
             total_price: formatPrice(totalPrice),
             items: cart.map(item => ({
-                product: item.id,
+                product: item.product,
                 quantity: item.quantity,
                 price: formatPrice(item.price),
                 total_price: formatPrice(item.price * item.quantity),
@@ -112,7 +112,6 @@ function CheckoutPage() {
             setUserAddress(address);
             setOrderData(prev => ({
                 ...prev,
-                shipping_address_text: `${address.street_address}, ${address.ward}, ${address.district}, ${address.province}`,
                 shipping_address: address.id,
                 billing_address: address.id,
             }));
@@ -121,38 +120,6 @@ function CheckoutPage() {
                 item => item.ProvinceID === parseInt(address.province, 10)
             );
             setProvinceName(province ? province.ProvinceName : 'Unknown');
-
-            if (address.province) {
-                getDistrictInformation(address.province)
-                    .then(districtsData => {
-                        setDistricts(districtsData);
-                        const district = districtsData.find(
-                            item => item.DistrictID === parseInt(address.district, 10)
-                        );
-                        setDistrictName(district ? district.DistrictName : 'Unknown');
-
-                        if (address.district) {
-                            getWardInformation(address.district)
-                                .then(wardsData => {
-                                    setWards(wardsData);
-                                    const ward = wardsData.find(
-                                        item => item.WardCode === address.ward
-                                    );
-                                    setWardName(ward ? ward.WardName : 'Unknown');
-                                })
-                                .catch(err => {
-                                    console.error('Error fetching wards:', err);
-                                    setWards([]);
-                                    setWardName('Unknown');
-                                });
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Error fetching districts:', err);
-                        setDistricts([]);
-                        setDistrictName('Unknown');
-                    });
-            }
         }
     }, [userData]);
 
@@ -161,13 +128,8 @@ function CheckoutPage() {
             getDistrictInformation(userAddress.province)
                 .then(districtsData => {
                     setDistricts(districtsData);
-                    setDistrictName('');
-                    setWards([]);
-                    setWardName('');
-                    setUserAddress(prev => ({...prev, district: '', ward: ''}));
                 })
                 .catch(err => {
-                    console.error('Error fetching districts:', err);
                     setDistricts([]);
                 });
         } else {
@@ -184,11 +146,8 @@ function CheckoutPage() {
             getWardInformation(userAddress.district)
                 .then(wardsData => {
                     setWards(wardsData);
-                    setWardName('');
-                    setUserAddress(prev => ({...prev, ward: ''}));
                 })
                 .catch(err => {
-                    console.error('Error fetching wards:', err);
                     setWards([]);
                 });
         } else {

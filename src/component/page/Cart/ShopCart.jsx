@@ -1,8 +1,10 @@
 import {Link, useNavigate} from "react-router-dom";
 import { Button, Empty, Typography, InputNumber, Popconfirm, message } from 'antd';
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
+import {CartContext} from "../../contexts/CartContext.jsx";
 
 function ShopCart() {
+    const { removeFromCart } = useContext(CartContext);
     const [cart, setCart] = useState(() => {
         return JSON.parse(localStorage.getItem('cart')) || [];
     });
@@ -92,6 +94,7 @@ function ShopCart() {
     const removeProduct = (id) => {
         const newCart = cart.filter(p => p.id !== id);
         setCart(newCart);
+        removeFromCart(id);
         message.success('Product removed from the cart.');
     }
 

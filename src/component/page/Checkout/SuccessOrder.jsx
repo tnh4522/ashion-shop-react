@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, {useContext, useEffect} from "react";
 import API from "../../service/service.jsx";
 import useUserContext from "../../hooks/useUserContext.jsx";
+import {CartContext} from "../../contexts/CartContext.jsx";
 
 function SuccessOrder() {
+    const { removeFromCart } = useContext(CartContext);
     const {userData, logout} = useUserContext();
     const url = window.location.href;
     const order = JSON.parse(localStorage.getItem('order'));
@@ -44,7 +46,12 @@ function SuccessOrder() {
             }).then(response => {
                 console.log("Xác nhận thanh toán:", response);
                 if(response.data.order) {
+                    const cart = JSON.parse(localStorage.getItem('cart'));
+                    cart.forEach(item => {
+                        removeFromCart(item.id);
+                    });
                     localStorage.removeItem('order');
+                    localStorage.removeItem('cart');
                 }
             }).catch(error => {
                 console.error("Có lỗi xảy ra khi xác nhận thanh toán:", error);
