@@ -17,8 +17,13 @@ export const CartProvider = ({children}) => {
         try {
             if (userData) {
                 // Người dùng đã đăng nhập: lấy giỏ hàng từ API
-                const response = await API.get('/cart/detail/');
+                const response = await API.get('/cart/detail/', {
+                    headers: {
+                        'Authorization': `Bearer ${userData.access}`,
+                    }
+                });
                 setCart(response.data.items);
+                localStorage.setItem('cart', JSON.stringify(response.data.items));
             } else {
                 // Người dùng không đăng nhập: lấy giỏ hàng từ localStorage
                 const storedCart = localStorage.getItem('cart');
@@ -27,7 +32,9 @@ export const CartProvider = ({children}) => {
             setError(null);
         } catch (err) {
             setError(err.response ? err.response.data : 'Error fetching cart');
-            openErrorNotification('Failed to fetch cart.');
+            if(err.status === 401) {
+                logout();
+            }
         } finally {
             setLoading(false);
         }
@@ -35,7 +42,7 @@ export const CartProvider = ({children}) => {
 
     // Gọi fetchCart khi trạng thái đăng nhập thay đổi
     useEffect(() => {
-        if (!userData) {
+        if (userData) {
             fetchCart();
         }
     }, [userData]);
@@ -73,6 +80,7 @@ export const CartProvider = ({children}) => {
                     }
                 });
                 openSuccessNotification('Product added to cart!');
+                fetchCart();
             } else {
                 // Người dùng không đăng nhập: lưu trữ trong localStorage
                 setCart((prevCart) => {

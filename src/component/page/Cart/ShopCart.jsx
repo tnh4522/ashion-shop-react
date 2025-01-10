@@ -43,9 +43,9 @@ function ShopCart() {
             return cart.map((p) => (
                 <tr key={p.id} id={`cart-item-${p.id}`}>
                     <td className="cart__product__item">
-                        <img src={p.image} alt={p.name} width="80" />
+                        <img src={p.image} alt={p.product_name} width="80" />
                         <div className="cart__product__item__title">
-                            <h6>{p.name}</h6>
+                            <h6>{p.product_name}</h6>
                             <div className="rating">
                                 {Array.from({ length: 5 }, (v, i) => (
                                     <i key={i} className={`fa fa-star${i < p.rating ? '' : '-o'}`}></i>
