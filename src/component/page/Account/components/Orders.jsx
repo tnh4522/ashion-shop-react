@@ -5,9 +5,11 @@ import './Orders.css';
 import {Flex, Tag, Pagination, message, Input} from "antd";
 import Search from "antd/es/input/Search.js";
 import debounce from 'lodash.debounce';
+import {useNavigate} from "react-router-dom";
 
 function Orders() {
-    const { userData, logout } = useUserContext();
+    const {userData, logout} = useUserContext();
+    const navigator = useNavigate();
     const [orders, setOrders] = useState([]);
     const [selectedTab, setSelectedTab] = useState('All');
     const [filterDate, setFilterDate] = useState('');
@@ -65,7 +67,7 @@ function Orders() {
             params.search = debouncedSearchTerm;
         }
 
-        API.get('orders/user/', { headers: auth.headers, params })
+        API.get('orders/user/', {headers: auth.headers, params})
             .then(response => {
                 console.log("API response:", response.data);
 
@@ -236,8 +238,7 @@ function Orders() {
     }
 
     function viewDetails(orderId) {
-        console.log(`View details for order ${orderId}`);
-        message.info(`View details for order ${orderId}`);
+        navigator(`/account/order/${orderId}`);
     }
 }
 

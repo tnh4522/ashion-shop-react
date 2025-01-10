@@ -1,0 +1,135 @@
+.container {
+    margin: 20px auto;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.order-header .order-id {
+    color: #777;
+}
+
+.order-status {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-item {
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+    position: relative;
+}
+
+.status-item.active {
+    color: green;
+    font-weight: bold;
+    border-bottom: 2px solid green;
+}
+
+.status-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 20px;
+    background-color: #ddd;
+}
+
+.order-info {
+    margin: 20px 0;
+}
+
+.order-info h2 {
+    margin-bottom: 10px;
+}
+
+.product-details {
+
+}
+
+.product-details img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 4px;
+}
+
+.product-total {
+
+}
+
+.product-description p {
+    margin: 5px 0;
+}
+
+.payment-info {
+    margin: 20px 0;
+}
+
+.payment-info h5 {
+    margin-bottom: 10px;
+
+}
+
+.payment-info table {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.payment-info th, .payment-info td {
+    padding: 8px;
+    text-align: left;
+}
+
+.payment-info th {
+    background: #f0f0f0;
+}
+
+.customer-info, .support-info, .warranty-info {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.support-info h3, .warranty-info h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.support-info p, .warranty-info p {
+    margin: 5px 0;
+}
+
+.warranty-info a {
+    color: blue;
+    text-decoration: none;
+}
+
+.warranty-info a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}

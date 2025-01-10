@@ -21,6 +21,7 @@ import Orders from "./component/page/Account/components/Orders.jsx";
 import Addresses from "./component/page/Account/components/Addresses.jsx";
 import Logout from "./component/page/Account/components/Logout.jsx";
 import SuccessOrder from "./component/page/Checkout/SuccessOrder.jsx";
+import OrderDetail from "./component/page/Account/components/OrderDetail.jsx";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -46,6 +47,7 @@ createRoot(document.getElementById('root')).render(
                         <Route path="orders" element={<Orders />} />
                         <Route path="addresses" element={<Addresses />} />
                         <Route path="logout" element={<Logout />} />
+                        <Route path="order/:id" element={<OrderDetail />} />
                     </Route>
                     <Route path="/order/check-payment" element={<SuccessOrder/>}/>
                 </Routes>
