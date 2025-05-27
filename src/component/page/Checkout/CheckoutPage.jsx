@@ -94,6 +94,7 @@ function CheckoutPage() {
             shipping_cost: formatPrice(shippingCost),
             total_price: formatPrice(totalPrice),
             items: cart.map(item => ({
+                name: item.product_name,
                 product: item.product,
                 quantity: item.quantity,
                 price: formatPrice(item.price),
@@ -217,6 +218,13 @@ function CheckoutPage() {
         }));
     }
 
+    function formatCurrency(value) {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(value);
+    }
+
     const handleOrderSubmit = async (e) => {
         e.preventDefault();
 
@@ -233,6 +241,40 @@ function CheckoutPage() {
             });
 
             if (response.status === 201) {
+                const productsTable = orderData.items
+                    .map(
+                        (item) => `
+                        <tr>
+                            <td style="border: 1px solid #ddd; max-width: 50px ; padding: 8px;">
+                                ${item.name}
+                            </td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                <p>Size: ${item.size}</p>
+                                <p>Color: ${item.color}</p>
+                                <p>Quantity: ${item.quantity}</p>
+                                <p>Price: ${formatCurrency(item.price)}</p>
+                                <p>Total: ${formatCurrency(item.total_price)}</p>
+                            </td>
+                        </tr>
+                    `
+                    )
+                    .join("");
+
+                const mailData = {
+                    order_date: new Date(response.data.created_at).toLocaleString(),
+                    order_number: response.data.order_number,
+                    customer_name: `${userData.user.first_name} ${userData.user.last_name}`,
+                    customer_email: userData.user.email,
+                    customer_phone: userData.user.phone_number,
+                    customer_address: `${userAddress.street_address}, ${wardName}, ${districtName}, ${provinceName}`,
+                    products_table: productsTable,
+                    subtotal: formatCurrency(orderData.subtotal_price),
+                    delivery_charge: formatCurrency(orderData.shipping_cost),
+                    total: formatCurrency(orderData.total_price),
+                    payment_method: orderData.payment_method === "COD" ? "Bank Transfer" : "Credit Card",
+                };
+
+                localStorage.setItem('mailData', JSON.stringify(mailData));
                 localStorage.setItem('order', JSON.stringify(response.data));
                 openSuccessNotification('Order created successfully.');
 

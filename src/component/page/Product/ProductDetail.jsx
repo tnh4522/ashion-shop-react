@@ -268,6 +268,7 @@ function ProductDetail() {
                                             src={activeImage}
                                             alt={product.name}
                                             className="img-fluid"
+                                            style={{width: "100%", height: "100%"}}
                                         />
                                     </div>
                                 </div>

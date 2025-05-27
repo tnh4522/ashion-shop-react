@@ -8,7 +8,10 @@ function Categories() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await API.get("categories/");
+                const params = {
+                    without_parent: true,
+                }
+                const response = await API.get("categories/", {params});
                 setCategories(response.data.results);
             } catch (error) {
                 console.error("There was an error fetching the categories:", error);

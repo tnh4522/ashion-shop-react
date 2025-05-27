@@ -2,9 +2,10 @@ import React, {useContext, useEffect} from "react";
 import API from "../../service/service.jsx";
 import useUserContext from "../../hooks/useUserContext.jsx";
 import {CartContext} from "../../contexts/CartContext.jsx";
+import emailjs from '@emailjs/browser';
 
 function SuccessOrder() {
-    const { removeFromCart } = useContext(CartContext);
+    const {removeFromCart} = useContext(CartContext);
     const {userData, logout} = useUserContext();
     const url = window.location.href;
     const order = JSON.parse(localStorage.getItem('order'));
@@ -32,7 +33,7 @@ function SuccessOrder() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        if(transactionID !== '' && orderCode !== '' && eventId !== '') {
+        if (transactionID !== '' && orderCode !== '' && eventId !== '') {
             API.post("payment/check/", {
                 transactionID: transactionID,
                 orderCode: orderCode,
@@ -44,12 +45,23 @@ function SuccessOrder() {
                     'Authorization': `Bearer ${userData.access}`,
                 }
             }).then(response => {
-                console.log("Xác nhận thanh toán:", response);
-                if(response.data.order) {
+                const mailData = JSON.parse(localStorage.getItem('mailData'));
+                emailjs
+                    .send("service_p88ktvq", "template_pxpdee5", mailData, "vEgBXEZLP-EKkISxc")
+                    .then((result) => {
+                        console.log("Order confirmation email sent:", result.text);
+                    })
+                    .catch((error) => {
+                        console.error("Error sending order confirmation:", error.text);
+                    })
+                localStorage.removeItem('mailData');
+
+                if (response.data.order) {
                     const cart = JSON.parse(localStorage.getItem('cart'));
                     cart.forEach(item => {
                         removeFromCart(item.id);
                     });
+
                     localStorage.removeItem('order');
                     localStorage.removeItem('cart');
                 }
